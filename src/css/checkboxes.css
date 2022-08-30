@@ -1,0 +1,58 @@
+div[class^='ckbx-style-'] input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+}
+.ckbx-style-11 {
+  font-size: 24px;
+}
+
+.ckbx-style-11 input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+}
+
+.ckbx-style-11 label {
+  width: 2em;
+  height: 1em;
+  position: relative;
+  cursor: pointer;
+  display: block;
+}
+
+.ckbx-style-11 label:before {
+  content: '';
+  position: absolute;
+  width: 2em;
+  height: 0.5em;
+  left: 0.1em;
+  top: 0.25em;
+  transition: background 0.1s 0.1s ease;
+  background: #f9f9f9;
+  border-radius: 50px;
+}
+
+.ckbx-style-11 label:after {
+  content: '';
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  left: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  background: #f9f9f9;
+  border-radius: 100%;
+  z-index: 2;
+  animation: switch-off 0.2s ease-out forwards;
+}
+
+.ckbx-style-11 input[type='checkbox']:checked + label:before {
+  background: #00bcd4;
+  opacity: 0.3;
+}
+
+.ckbx-style-11 input[type='checkbox']:checked + label:after {
+  left: 1.1em;
+  background: #00bcd4;
+  opacity: 0.8;
+  animation: switch-on 0.2s ease-out forwards;
+}
