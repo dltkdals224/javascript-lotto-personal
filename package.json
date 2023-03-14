@@ -36,5 +36,11 @@
   "bugs": {
     "url": "https://github.com/dltkdals224/javascript-lotto-personal/issues"
   },
-  "homepage": "https://github.com/dltkdals224/javascript-lotto-personal#readme"
+  "homepage": "https://github.com/dltkdals224/javascript-lotto-personal#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
+    "iconv-lite": "^0.6.3",
+    "puppeteer": "^17.1.1"
+  }
 }
