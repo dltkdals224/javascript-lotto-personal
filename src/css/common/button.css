@@ -1,0 +1,38 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 56px;
+  height: 36px;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+
+  border: none;
+  border-radius: 4px;
+
+  color: white;
+  background-color: #00bcd4;
+
+  cursor: pointer;
+}
+.button:disabled {
+  filter: brightness(60%);
+  cursor: default;
+}
+.button:hover:enabled {
+  filter: brightness(110%);
+}
+.button:active:enabled {
+  filter: brightness(120%);
+}
+
+.button-container {
+  display: flex;
+
+  gap: 10px;
+}

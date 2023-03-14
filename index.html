@@ -2,62 +2,11 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>🎱 행운의 로또</title>
+    <title>🎱 로또 번호 추출기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link rel="stylesheet" href="src/css/reset.css" />
-    <link rel="stylesheet" href="src/css/style.css" />
-    <link rel="stylesheet" href="src/css/checkboxes.css" />
-    <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <main>
-      <section>
-        <h1>🎱 행운의 로또</h1>
-
-        <div class="default-form">
-          <span>구입할 금액을 입력해주세요.</span>
-          <form>
-            <input id="purchase-price__input" placeholder="금액" />
-            <button id="purchase-price-confirm__button">구입</button>
-          </form>
-        </div>
-
-        <div class="default-form">
-          <div id="lotto-number-container__div" class="space-between">
-            <span>tmp</span>
-            <span>번호 보기</span>
-            <div id="lotto-number-onoff__radio" class="ckbx-style-11">
-              <input type="checkbox" id="ckbx-style-11-1" value="0" name="ckbx-style-11" />
-              <label for="ckbx-style-11-1"></label>
-            </div>
-          </div>
-          <div id="lotto-number-list__div" class="visible-hidden">tmpNum</div>
-        </div>
-
-        <div class="default-form">
-          <span>지난 주 당첨번호 6개와 보너스 번호 1개 입니다.</span>
-          <div class="space-between margin-top">
-            <span>당첨 번호</span>
-            <span>보너스 번호</span>
-          </div>
-          <div class="space-between margin-top">
-            <span>1,2,3,4,5</span>
-            <span>6</span>
-          </div>
-        </div>
-
-        <div class="default-form">
-          <form>
-            <button id="result-confirm__button">결과 확인하기</button>
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <script type="module" src="./src/js/components/domain/getLottoNumber.js"></script>
-    <script type="module" src="./src/js/components/domain/test.js"></script>
-    <script type="module" src="./src/js/components/ui/test.js"></script>
+    <main id="app"></main>
   </body>
 </html>
