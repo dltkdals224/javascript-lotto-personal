@@ -1,4 +1,4 @@
-main {
+body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,17 +9,28 @@ main {
   background-color: #f9f9f9;
 }
 
-section {
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  width: 414px;
-  height: 727px;
+  width: 550px;
+  height: 750px;
 
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 400px;
+
+  margin-top: 30px;
 }
 
 h1 {
@@ -40,52 +51,58 @@ form {
 
 /* id */
 
-#purchase-price__input {
-  width: 310px;
+#purchase-price-input {
+  width: 100px;
   height: 32px;
 
   border: 1px solid #b4b4b4;
   border-radius: 4px;
 }
-#purchase-price__input::placeholder {
+#purchase-price-input::placeholder {
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.5px;
 }
 
-#purchase-price-confirm__button {
+#lotto-number-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#lotto-number-container {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+}
+
+.lotto-number {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 56px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
 
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  background-color: #00bcd4;
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  background-color: white;
 
   cursor: pointer;
 }
-#purchase-price-confirm__button:disabled {
-  filter: brightness(60%);
-  cursor: default;
-}
-#purchase-price-confirm__button:hover:enabled {
-  filter: brightness(110%);
-}
-#purchase-price-confirm__button:active:enabled {
-  filter: brightness(120%);
+
+#purchase-amount-select {
+  width: 100px;
+  height: 34px;
 }
 
-#lotto-number-container__div {
-  position: relative;
+.selected {
+  color: white;
+  background-color: #00bcd4;
 }
 
 #lotto-number-onoff__radio {
@@ -159,4 +176,8 @@ form {
 
 .visible-hidden {
   visibility: hidden;
+}
+
+.display-none {
+  display: none;
 }
