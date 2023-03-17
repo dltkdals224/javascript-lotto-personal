@@ -1,6 +1,28 @@
 class View {
-  constructor() {
+  constructor(controller) {
+    this.controller = controller;
+
     this.initView();
+  }
+
+  updateInput(price) {
+    // console.log(5);
+
+    const PRICE_INPUT = document.getElementById('purchase-price-input');
+
+    if (isNaN(price)) {
+      PRICE_INPUT.disabled = false;
+      PRICE_INPUT.value = '';
+    }
+    if (!isNaN(price)) {
+      PRICE_INPUT.disabled = true;
+      PRICE_INPUT.value = price.toLocaleString('ko-KR');
+    }
+  }
+
+  renderLottoNumberSelectSection() {
+    const LOTTO_NUMBER_SELECT_SECTION = document.getElementById('lotto-number-select-section');
+    LOTTO_NUMBER_SELECT_SECTION.classList.remove('display-none');
   }
 
   initView() {
@@ -10,7 +32,7 @@ class View {
             <h1>🎱 로또 번호 추출기</h1>
         </section>
 
-        <section>
+        <section id="lotto-price-section" >
             <h2 class="display-none">구입 금액 입력</h2>
 
             <div>
@@ -21,16 +43,15 @@ class View {
                         <option value="10000">10,000</option>
                         <option value="15000">15,000</option>
                         <option value="20000">20,000</option>
-                        <option value="25000">25,000</option>
-                        <option value="auto">직접 입력</option>
+                        <option value="auto" selected>직접 입력</option>
                     </select>
-                    <input id="purchase-price__input" placeholder="금액" />
-                    <button class="button">구입</button>
+                    <input id="purchase-price-input" placeholder="금액" />
+                    <button id="purchase-btn" class="button">구입</button>
                 </form>
             </div>
         </section>
 
-        <section id="lotto-number-section" class="display-none">
+        <section id="lotto-number-select-section" class="display-none">
             <h2 class="display-none">구입 번호 입력</h2>
             <form id="lotto-number-form">
                 <div id="lotto-number-container"></div>
@@ -41,14 +62,14 @@ class View {
             </form>
         </section>
 
-        <section>
+        <section id="lotto-number-selected-section" class="display-none">
             <h2 class="display-none">구입 번호</h2>
         
             <span>구매한 번호</span>
             <div id="selected-lotto-number-container"></div>
         </section>
 
-        <section>
+        <section id="lotto-number-selected-section" class="display-none">
             <h2 class="display-none">지난 회차 정보</h2>
 
             <span>지난 회차의 당첨번호</span>

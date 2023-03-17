@@ -1,18 +1,61 @@
 class Controller {
   constructor(model, view) {
+    // add eventListener
+    window.addEventListener('priceSelected', event => {
+      // console.log(4);
+      this.view.updateInput(event.detail.price);
+    });
+
+    // detect eventListener
+    this.detectChangePriceSelect();
+    this.detectClickPurchaseButton();
+
+    // init
     this.model = model;
     this.view = view;
 
-    this.init();
+    this.initController();
   }
 
-  init() {
+  detectChangePriceSelect() {
+    // console.log(1);
+    const AMOUNT_SELECT = document.getElementById('purchase-amount-select');
+
+    AMOUNT_SELECT.addEventListener('change', () => {
+      const SELECTED_PRICE = AMOUNT_SELECT.options[AMOUNT_SELECT.selectedIndex].value;
+
+      this.selectPrice(Number(SELECTED_PRICE));
+    });
+  }
+
+  detectClickPurchaseButton() {
+    const PURCHASE_BTN = document.getElementById('purchase-btn');
+
+    PURCHASE_BTN.addEventListener('click', event => {
+      event.preventDefault();
+
+      const PRICE_INPUT = document.getElementById('purchase-price-input');
+
+      // PRICE_INPUT검증 로직 필요
+      this.model.purchaseAmount = Number(PRICE_INPUT.value.replace(/,/g, ''));
+      this.view.renderLottoNumberSelectSection();
+    });
+  }
+
+  initController() {
     this.initializeData();
     this.createLottoNumberField();
   }
 
   initializeData() {
-    console.log(this.model.purchaseAmount);
+    this.model.uiStep = 1;
+
+    this.model.purchaseAmount = 0;
+
+    this.model.selectedNumbers = [];
+    this.model.selectedNumbersList = {};
+
+    this.model.winningNumberList = {};
   }
 
   createLottoNumberField() {
@@ -28,6 +71,12 @@ class Controller {
 
       LOTTO_NUMBER_CONTAINER.appendChild(LOTTO_NUMBER);
     }
+  }
+
+  selectPrice(price) {
+    // console.log(2);
+
+    this.model.selectPrice(price);
   }
 }
 
