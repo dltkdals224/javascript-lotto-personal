@@ -51,19 +51,6 @@ form {
 
 /* id */
 
-#purchase-price-input {
-  width: 100px;
-  height: 32px;
-
-  border: 1px solid #b4b4b4;
-  border-radius: 4px;
-}
-#purchase-price-input::placeholder {
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-}
-
 #lotto-number-form {
   display: flex;
   flex-direction: column;
@@ -79,30 +66,27 @@ form {
   width: 100%;
 }
 
-.lotto-number {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#selected-lotto-number-container {
+  font-size: 24px;
+  font-weight: 200;
+  color: #00bcd4;
+}
 
-  width: 30px;
-  height: 30px;
+#confirmed-lotto-number {
+  width: 300px;
+  height: 150px;
 
-  border: 1px solid gray;
+  padding: 5px;
+
+  border: 1px solid #00bcd4;
   border-radius: 5px;
 
-  background-color: white;
-
-  cursor: pointer;
+  overflow-y: scroll;
 }
 
 #purchase-amount-select {
   width: 100px;
   height: 34px;
-}
-
-.selected {
-  color: white;
-  background-color: #00bcd4;
 }
 
 #lotto-number-onoff__radio {
@@ -124,60 +108,42 @@ form {
   background-color: red;
 }
 
-/*  */
-
-#result-confirm__button {
+/* className */
+.lotto-number {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 382px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
 
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  background-color: #00bcd4;
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  background-color: white;
 
   cursor: pointer;
 }
-#result-confirm__button:disabled {
-  filter: brightness(60%);
-  cursor: default;
-}
-#result-confirm__button:hover:enabled {
-  filter: brightness(110%);
-}
-#result-confirm__button:active:enabled {
-  filter: brightness(120%);
+
+.selected {
+  color: white;
+  background-color: #00bcd4;
 }
 
-/* className */
-
-.default-form {
-  width: 382px;
-
-  margin-top: 30px;
-}
-
-.space-between {
-  display: flex;
-  justify-content: space-between;
-}
-
-.margin-top {
-  margin-top: 10px;
-}
-
-.visible-hidden {
-  visibility: hidden;
+.title {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .display-none {
   display: none;
+}
+
+.clicked {
+  background-color: #00bcd4;
+  opacity: 0.9;
+}
+
+.disabled {
+  background-color: rgba(0, 0, 0, 0.24);
 }
