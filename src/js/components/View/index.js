@@ -6,8 +6,6 @@ class View {
   }
 
   updateInput(price) {
-    // console.log(5);
-
     const PRICE_INPUT = document.getElementById('purchase-price-input');
 
     if (isNaN(price)) {
@@ -20,9 +18,76 @@ class View {
     }
   }
 
+  updateInputValue() {
+    const PRICE_INPUT = document.getElementById('purchase-price-input');
+
+    if (PRICE_INPUT.type == 'number') {
+      PRICE_INPUT.type = 'text';
+      PRICE_INPUT.value = Number(PRICE_INPUT.value).toLocaleString('ko-KR');
+    }
+    if (PRICE_INPUT.type === 'text') {
+      PRICE_INPUT.type = 'text';
+    }
+  }
+
   renderLottoNumberSelectSection() {
     const LOTTO_NUMBER_SELECT_SECTION = document.getElementById('lotto-number-select-section');
     LOTTO_NUMBER_SELECT_SECTION.classList.remove('display-none');
+
+    const LOTTO_NUMBER_SELECTED_SECTION = document.getElementById('lotto-number-selected-section');
+    LOTTO_NUMBER_SELECTED_SECTION.classList.remove('display-none');
+  }
+
+  updateLottoNumbers(lottoArray) {
+    const NODE_LIST = document.querySelectorAll('.lotto-number');
+
+    NODE_LIST.forEach(node => {
+      const LOTTO_NUMBER = Number(node.id.split('-')[2]);
+
+      // TO FIX
+      // IDEA: fxJS
+      if (lottoArray.length !== 6) {
+        node.classList.remove('disabled');
+        if (lottoArray.includes(LOTTO_NUMBER)) {
+          node.classList.add('clicked');
+        } else {
+          node.classList.remove('clicked');
+        }
+      }
+      if (lottoArray.length === 6) {
+        if (lottoArray.includes(LOTTO_NUMBER)) {
+          node.classList.add('clicked');
+        } else {
+          node.classList.add('disabled');
+        }
+      }
+    });
+  }
+
+  reRenderLottoNumberSelectSection() {
+    const NODE_LIST = document.querySelectorAll('.lotto-number');
+
+    NODE_LIST.forEach(node => {
+      node.classList.remove('disabled');
+      node.classList.remove('clicked');
+    });
+  }
+
+  updateLottoNumberSelectedSection(list) {
+    const SELECTED_LOTTO_NUMBER_CONTAINER = document.getElementById(
+      'selected-lotto-number-container'
+    );
+    const ADDED_LOTTO_NUMBERS = [...list].pop();
+    const DIV = document.createElement('div');
+
+    ADDED_LOTTO_NUMBERS.forEach((number, idx) => {
+      if (idx === ADDED_LOTTO_NUMBERS.length - 1) {
+        DIV.innerText += `${number}`;
+      } else {
+        DIV.innerText += `${number}, `;
+      }
+    });
+    SELECTED_LOTTO_NUMBER_CONTAINER.appendChild(DIV);
   }
 
   initView() {
@@ -36,16 +101,14 @@ class View {
             <h2 class="display-none">구입 금액 입력</h2>
 
             <div>
-                <span>구입할 금액을 입력해주세요.</span>
+                <span class="title">구입할 금액을 입력해주세요.</span>
                 <form>
                     <select id="purchase-amount-select">
                         <option value="5000">5,000</option>
                         <option value="10000">10,000</option>
-                        <option value="15000">15,000</option>
-                        <option value="20000">20,000</option>
                         <option value="auto" selected>직접 입력</option>
                     </select>
-                    <input id="purchase-price-input" placeholder="금액" />
+                    <input id="purchase-price-input" placeholder="금액" type="number"/>
                     <button id="purchase-btn" class="button">구입</button>
                 </form>
             </div>
@@ -56,8 +119,8 @@ class View {
             <form id="lotto-number-form">
                 <div id="lotto-number-container"></div>
                 <div class="button-container">
-                    <button class="button">자동</button>
-                    <button class="button">확정</button>
+                    <button id="auto-btn" class="button">자동</button>
+                    <button id="confirm-btn" class="button">확정</button>
                 </div>
             </form>
         </section>
@@ -65,20 +128,14 @@ class View {
         <section id="lotto-number-selected-section" class="display-none">
             <h2 class="display-none">구입 번호</h2>
         
-            <span>구매한 번호</span>
-            <div id="selected-lotto-number-container"></div>
+            <div id="confirmed-lotto-number">
+              <span class="title">구매한 번호</span>
+              <div id="selected-lotto-number-container"></div>
+            </div>
         </section>
 
-        <section id="lotto-number-selected-section" class="display-none">
+        <section id="scrapped-section" >
             <h2 class="display-none">지난 회차 정보</h2>
-
-            <span>지난 회차의 당첨번호</span>
-            <div class="last-lotto-number"></div>
-
-            <div class="space-between margin-top">
-                <span>1,2,3,4,5</span>
-            <span>6</span>
-            </div>
         </section>
     `;
   }
