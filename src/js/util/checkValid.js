@@ -1,5 +1,6 @@
 export const isValidAmount = price => {
-  if (!isNaN(price) && typeof price === 'number' && price > 0 && price % 1000 === 0) {
+  // TO FIX
+  if (!isNaN(price) && typeof price === 'number' && price > 0 && price % 5000 === 0) {
     return true;
   }
   return false;
