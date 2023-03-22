@@ -1,4 +1,5 @@
 import { isValidAmount, isValidLottoNumber } from '../../util/checkValid';
+import generateLottoNumber from '../../util/generateLottoNumber';
 
 class Controller {
   constructor(model, view) {
@@ -22,15 +23,21 @@ class Controller {
       this.view.updateLottoNumbers(event.detail);
     });
 
+    window.addEventListener('autoButtonClicked', event => {
+      this.view.updateLottoNumbers(event.detail);
+    });
+
     window.addEventListener('confirmButtonClicked', event => {
-      this.view.reRenderLottoNumberSelectSection();
-      this.view.updateLottoNumberSelectedSection(event.detail);
+      this.view.reRenderLottoNumberSelectSection(event.detail.isReachAmount);
+      this.view.updateLottoNumberSelectedSection(event.detail.selectedLottoNumbersList);
     });
 
     // eventListener detection
     this.detectChangePriceSelect();
     this.detectClickPurchaseButton();
+    this.detectClickAutoButton();
     this.detectClickConfrimButton();
+    this.detectClickResetButton();
   }
 
   detectChangePriceSelect() {
@@ -43,6 +50,8 @@ class Controller {
 
       this.model.selectPrice(Number(SELECTED_PRICE));
     });
+
+    // test()
   }
 
   detectClickPurchaseButton() {
@@ -67,6 +76,16 @@ class Controller {
     });
   }
 
+  detectClickAutoButton() {
+    const AUTO_BTN = document.getElementById('auto-btn');
+
+    AUTO_BTN.addEventListener('click', event => {
+      event.preventDefault();
+
+      this.model.clickAutoButton(generateLottoNumber(45, 6));
+    });
+  }
+
   detectClickConfrimButton() {
     const CONFIRM_BTN = document.getElementById('confirm-btn');
 
@@ -78,11 +97,14 @@ class Controller {
       } else {
         alert('6개의 숫자를 클릭해주세요.');
       }
+    });
+  }
 
-      if (this.model.selectedLottoNumbersList.length >= this.model.purchaseAmount / 1000) {
-        const LOTTO_NUMBER_SELECT_SECTION = document.getElementById('lotto-number-select-section');
-        LOTTO_NUMBER_SELECT_SECTION.classList.add('display-none');
-      }
+  detectClickResetButton() {
+    const RESET_BTN = document.getElementById('reset-btn');
+
+    RESET_BTN.addEventListener('click', () => {
+      location.reload();
     });
   }
 
@@ -103,7 +125,7 @@ class Controller {
   }
 
   createLottoNumberField() {
-    const LOTTO_NUMBER_CONTAINER = document.getElementById('lotto-number-container');
+    const LOTTO_NUMBER_CONTAINER = document.getElementById('lotto-number-wrapper');
     const LOTTO_NUMBER_MAX_LENGTH = 45;
 
     for (let number = 1; number <= LOTTO_NUMBER_MAX_LENGTH; number++) {

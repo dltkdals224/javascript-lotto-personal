@@ -1,13 +1,11 @@
 class Model {
   constructor() {
-    // this.uiStep = 1;
-
     this.purchaseAmount = 0;
 
     this.selectedLottoNumbers = [];
     this.selectedLottoNumbersList = [];
 
-    this.winningNumberList = {};
+    this.winningNumberList = [];
   }
 
   selectPrice(price) {
@@ -23,6 +21,10 @@ class Model {
   }
 
   selectLottoNumber(number) {
+    if (this.selectedLottoNumbersList.length >= this.purchaseAmount / 1000) {
+      return;
+    }
+
     // TO FIX
     // IDEA: fxJS
     if (this.selectedLottoNumbers.includes(number)) {
@@ -38,12 +40,24 @@ class Model {
     window.dispatchEvent(EVENT);
   }
 
+  clickAutoButton(numbers) {
+    this.selectedLottoNumbers = numbers;
+
+    const EVENT = new CustomEvent('autoButtonClicked', {
+      detail: this.selectedLottoNumbers,
+    });
+    window.dispatchEvent(EVENT);
+  }
+
   clickConfirmButton() {
     this.selectedLottoNumbersList.push(this.selectedLottoNumbers);
     this.selectedLottoNumbers = [];
 
     const EVENT = new CustomEvent('confirmButtonClicked', {
-      detail: this.selectedLottoNumbersList,
+      detail: {
+        isReachAmount: this.selectedLottoNumbersList.length >= this.purchaseAmount / 1000,
+        selectedLottoNumbersList: this.selectedLottoNumbersList,
+      },
     });
     window.dispatchEvent(EVENT);
   }
