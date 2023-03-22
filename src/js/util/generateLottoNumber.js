@@ -1,8 +1,9 @@
 const generateLottoNumber = (totalIndex, selectingNumber) => {
   let randomIndexArray = [];
 
-  for (i = 0; i < selectingNumber; i++) {
-    randomNum = Math.floor(Math.random() * totalIndex);
+  for (let i = 0; i < selectingNumber; i++) {
+    let randomNum = Math.floor(Math.random() * totalIndex);
+
     if (randomIndexArray.indexOf(randomNum + 1) === -1) {
       randomIndexArray.push(randomNum + 1);
     } else {
