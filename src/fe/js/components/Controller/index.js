@@ -1,9 +1,13 @@
 import { isValidAmount, isValidLottoNumber } from '../../util/checkValid';
 import generateLottoNumber from '../../util/generateLottoNumber';
 
+import { getLottoInfo } from '../../api/lotto';
+import { setSessionStorageItem, getSessionStorageItem } from '../../util/sessionStorage';
+
+import { flow, split } from 'lodash/fp';
+
 class Controller {
   constructor(model, view) {
-    // init
     this.model = model;
     this.view = view;
 
@@ -50,8 +54,6 @@ class Controller {
 
       this.model.selectPrice(Number(SELECTED_PRICE));
     });
-
-    // test()
   }
 
   detectClickPurchaseButton() {
@@ -110,6 +112,7 @@ class Controller {
 
   initController() {
     this.initializeData();
+    this.scrapLatestLottoNumber();
     this.createLottoNumberField();
   }
 
@@ -140,6 +143,74 @@ class Controller {
       });
 
       LOTTO_NUMBER_CONTAINER.appendChild(LOTTO_NUMBER);
+    }
+  }
+
+  scrapLatestLottoNumber() {
+    if (!getSessionStorageItem('latestLottoNumbers')) {
+      (async () => {
+        const res = await getLottoInfo();
+        this.showScrappedData(res.data);
+        setSessionStorageItem('latestLottoNumbers', res.data);
+      })();
+    } else {
+      this.showScrappedData(getSessionStorageItem('latestLottoNumbers'));
+    }
+  }
+
+  showScrappedData(datas) {
+    const LOTTO_ROUND_CONTAINER = document.getElementById('lotto-round-container');
+
+    for (let data of datas) {
+      const LOTTO_ROUND = document.createElement('div');
+
+      // ROUND
+      const ROUND = document.createElement('strong');
+      ROUND.innerText = `${data.lottoRound}회차`;
+      ROUND.classList.add('font-bold');
+      LOTTO_ROUND.appendChild(ROUND);
+
+      // DATE
+      const DATE = document.createElement('span');
+      const TRANSLATED_DATE = flow(
+        split('.'),
+        target => ` (${target[0]}년 ${target[1]}월 ${target[2]}일)`
+      )(data.date);
+      DATE.innerText = TRANSLATED_DATE;
+      DATE.classList.add('font-lighter');
+      LOTTO_ROUND.appendChild(DATE);
+
+      // LOTTO NUMBERS
+      const NUMBER_LIST = document.createElement('div');
+      NUMBER_LIST.classList.add('lottoball-wrapper');
+      for (let [idx, number] of data.lottoNumber.entries()) {
+        const NUMBER = document.createElement('span');
+        NUMBER.innerText = number;
+        if (Number(number) >= 1 && Number(number) < 11) {
+          NUMBER.classList.add('lottoball-yellow');
+        }
+        if (Number(number) >= 11 && Number(number) < 21) {
+          NUMBER.classList.add('lottoball-blue');
+        }
+        if (Number(number) >= 21 && Number(number) < 31) {
+          NUMBER.classList.add('lottoball-red');
+        }
+        if (Number(number) >= 31 && Number(number) < 41) {
+          NUMBER.classList.add('lottoball-gray');
+        }
+        if (Number(number) >= 41 && Number(number) <= 45) {
+          NUMBER.classList.add('lottoball-green');
+        }
+        if (idx === 6) {
+          const BONUS_NUMBER_INTERVAL = document.createElement('span');
+          BONUS_NUMBER_INTERVAL.innerText = '+';
+          NUMBER_LIST.appendChild(BONUS_NUMBER_INTERVAL);
+        }
+        NUMBER_LIST.appendChild(NUMBER);
+      }
+      LOTTO_ROUND.appendChild(NUMBER_LIST);
+
+      LOTTO_ROUND_CONTAINER.appendChild(LOTTO_ROUND);
     }
   }
 }

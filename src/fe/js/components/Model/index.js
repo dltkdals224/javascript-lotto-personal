@@ -26,7 +26,6 @@ class Model {
     }
 
     // TO FIX
-    // IDEA: fxJS
     if (this.selectedLottoNumbers.includes(number)) {
       const TARGET_IDX = this.selectedLottoNumbers.indexOf(number);
       this.selectedLottoNumbers.splice(TARGET_IDX, 1);

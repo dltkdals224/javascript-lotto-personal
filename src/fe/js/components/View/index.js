@@ -50,7 +50,6 @@ class View {
       const LOTTO_NUMBER = Number(node.id.split('-')[2]);
 
       // TO FIX
-      // IDEA: fxJS
       node.classList.remove('disabled');
 
       if (lottoArray.length !== 6) {
@@ -95,42 +94,60 @@ class View {
       'selected-lotto-number-wrapper'
     );
     const ADDED_LOTTO_NUMBERS = [...selectedLottoNumbersList].pop();
-    const DIV = document.createElement('div');
+    ADDED_LOTTO_NUMBERS.sort((a, b) => a - b);
 
-    ADDED_LOTTO_NUMBERS.sort((a, b) => a - b).forEach((number, idx) => {
-      if (idx === ADDED_LOTTO_NUMBERS.length - 1) {
-        DIV.innerText += `${number}`;
-      } else {
-        DIV.innerText += `${number}, `;
+    const NUMBER_LIST = document.createElement('div');
+    NUMBER_LIST.classList.add('lottoball-broad-wrapper');
+
+    for (let number of ADDED_LOTTO_NUMBERS) {
+      const NUMBER = document.createElement('span');
+      NUMBER.innerText = number;
+      if (Number(number) >= 1 && Number(number) < 11) {
+        NUMBER.classList.add('lottoball-yellow');
       }
-    });
+      if (Number(number) >= 11 && Number(number) < 21) {
+        NUMBER.classList.add('lottoball-blue');
+      }
+      if (Number(number) >= 21 && Number(number) < 31) {
+        NUMBER.classList.add('lottoball-red');
+      }
+      if (Number(number) >= 31 && Number(number) < 41) {
+        NUMBER.classList.add('lottoball-gray');
+      }
+      if (Number(number) >= 41 && Number(number) <= 45) {
+        NUMBER.classList.add('lottoball-green');
+      }
 
-    SELECTED_LOTTO_NUMBER_CONTAINER.appendChild(DIV);
+      NUMBER_LIST.appendChild(NUMBER);
+    }
+
+    SELECTED_LOTTO_NUMBER_CONTAINER.appendChild(NUMBER_LIST);
   }
 
   initView() {
     this.target = document.getElementById('app');
     this.target.innerHTML = `
-      <section id="scrapped-info-section" >
-        <h2 class="display-none">지난 회차 번호</h2>
+      <section id="scrapped-info-section">
+        <h2>🎱 지난 회차 번호</h2>
         
-        지난 회차 번호
+        <article id="lotto-round-container">
+        </article>
       </section>
 
       <section id="lotto-section">
-        <h2 class="display-none">로또 번호 추출</h2>
+        <h1>🎱 로또 번호 추출기</h1>
 
-        <article>
-          <h1>🎱 로또 번호 추출기</h1>
-        </article>
-
-        <article id="lotto-price-container" >
+        <article id="lotto-price-container">
           <div>
-              <span class="title">구입할 금액을 입력해주세요.</span>
+              <span class="font-bold">구입할 금액을 입력해주세요.</span>
               <form>
                   <select id="purchase-amount-select">
                       <option value="5000">5,000</option>
                       <option value="10000">10,000</option>
+                      <option value="15000">15,000</option>
+                      <option value="20000">20,000</option>
+                      <option value="30000">30,000</option>
+                      <option value="50000">50,000</option>
                       <option value="auto" selected>직접 입력</option>
                   </select>
                   <input id="purchase-price-input" placeholder="금액" type="number"/>
@@ -151,7 +168,7 @@ class View {
 
         <article id="lotto-number-selected-container" class="display-none">
           <div id="confirmed-lotto-number">
-            <span class="title">구매한 번호</span>
+            <span class="font-bold">선택번호 확인</span>
             <div id="selected-lotto-number-wrapper"></div>
           </div>
         </article>
@@ -162,9 +179,9 @@ class View {
       </section>
 
       <section id="purchased-lotto-section" >
-        <h2 class="display-none">구매한 로또 번호</h2>
+        <h2>🎱 구매한 로또 번호</h2>
 
-        구매한 번호
+        <div>(구현 중)</div>
       </section>
     `;
   }
