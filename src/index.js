@@ -1,4 +1,4 @@
-import './css/index.css';
-import { Program } from './js/app.js';
+import './fe/css/index.css';
+import { Program } from './fe/js/app.js';
 
 new Program();
