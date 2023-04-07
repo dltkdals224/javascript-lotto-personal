@@ -31,7 +31,7 @@
   filter: brightness(120%);
 }
 
-.button-container {
+.button-wrapper {
   display: flex;
 
   gap: 10px;
