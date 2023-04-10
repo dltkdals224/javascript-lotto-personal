@@ -1,12 +1,14 @@
 module.exports = {
   presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
         targets: {
-          node: "current",
+          node: 'current',
         },
       },
     ],
   ],
+  plugins: ['lodash'],
+  ignore: ['./node_modules/lodash'],
 };
