@@ -1,10 +1,12 @@
-import { isValidAmount, isValidLottoNumber } from '../../util/checkValid';
-import generateLottoNumber from '../../util/generateLottoNumber';
+import { flow, split } from 'lodash/fp';
 
 import { getLottoInfo } from '../../api/lotto';
+
+import { isValidAmount, isValidLottoNumber } from '../../util/checkValid';
+import generateLottoNumber from '../../util/generateLottoNumber';
 import { setSessionStorageItem, getSessionStorageItem } from '../../util/sessionStorage';
 
-import { flow, split } from 'lodash/fp';
+import { colors } from '../../constant';
 
 class Controller {
   constructor(model, view) {
@@ -31,15 +33,22 @@ class Controller {
       this.view.updateLottoNumbers(event.detail);
     });
 
-    window.addEventListener('confirmButtonClicked', event => {
+    window.addEventListener('applyButtonClicked', event => {
       this.view.reRenderLottoNumberSelectSection(event.detail.isReachAmount);
       this.view.updateLottoNumberSelectedSection(event.detail.selectedLottoNumbersList);
+    });
+
+    window.addEventListener('confirmButtonClicked', event => {
+      this.view.controllButtonStatus(event.detail.isPurchaseEnd);
+      this.view.reRenderSelectedLottoNumberDiv();
+      this.view.updateConfirmedLottoNumberSection(event.detail.selectedLottoNumbersList);
     });
 
     // eventListener detection
     this.detectChangePriceSelect();
     this.detectClickPurchaseButton();
     this.detectClickAutoButton();
+    this.detectClickApplyButton();
     this.detectClickConfrimButton();
     this.detectClickResetButton();
   }
@@ -88,17 +97,27 @@ class Controller {
     });
   }
 
+  detectClickApplyButton() {
+    const APPLY_BTN = document.getElementById('apply-btn');
+
+    APPLY_BTN.addEventListener('click', event => {
+      event.preventDefault();
+
+      if (isValidLottoNumber(this.model.selectedLottoNumbers)) {
+        this.model.clickApplyButton();
+      } else {
+        alert('6개의 숫자를 클릭해주세요.');
+      }
+    });
+  }
+
   detectClickConfrimButton() {
     const CONFIRM_BTN = document.getElementById('confirm-btn');
 
     CONFIRM_BTN.addEventListener('click', event => {
       event.preventDefault();
 
-      if (isValidLottoNumber(this.model.selectedLottoNumbers)) {
-        this.model.clickConfirmButton();
-      } else {
-        alert('6개의 숫자를 클릭해주세요.');
-      }
+      this.model.clickConfirmButton();
     });
   }
 
@@ -117,33 +136,13 @@ class Controller {
   }
 
   initializeData() {
-    this.model.uiStep = 1;
+    this.purchaseAmount = 0;
+    this.purchaseCount = 0;
+    this.confirmedCount = 0;
+    this.isconfirmedEnd = false;
 
-    this.model.purchaseAmount = 0;
-
-    this.model.selectedNumbers = [];
-    this.model.selectedNumbersList = {};
-
-    this.model.winningNumberList = {};
-  }
-
-  createLottoNumberField() {
-    const LOTTO_NUMBER_CONTAINER = document.getElementById('lotto-number-wrapper');
-    const LOTTO_NUMBER_MAX_LENGTH = 45;
-
-    for (let number = 1; number <= LOTTO_NUMBER_MAX_LENGTH; number++) {
-      const LOTTO_NUMBER = document.createElement('div');
-
-      LOTTO_NUMBER.id = `lotto-number-${number}`;
-      LOTTO_NUMBER.classList.add('lotto-number');
-      LOTTO_NUMBER.innerText = number;
-
-      LOTTO_NUMBER.addEventListener('click', event => {
-        this.model.selectLottoNumber(Number(event.target.innerText));
-      });
-
-      LOTTO_NUMBER_CONTAINER.appendChild(LOTTO_NUMBER);
-    }
+    this.selectedLottoNumbers = [];
+    this.selectedLottoNumbersList = [];
   }
 
   scrapLatestLottoNumber() {
@@ -183,24 +182,14 @@ class Controller {
       // LOTTO NUMBERS
       const NUMBER_LIST = document.createElement('div');
       NUMBER_LIST.classList.add('lottoball-wrapper');
-      for (let [idx, number] of data.lottoNumber.entries()) {
+
+      for (let [idx, num] of data.lottoNumber.entries()) {
         const NUMBER = document.createElement('span');
-        NUMBER.innerText = number;
-        if (Number(number) >= 1 && Number(number) < 11) {
-          NUMBER.classList.add('lottoball-yellow');
-        }
-        if (Number(number) >= 11 && Number(number) < 21) {
-          NUMBER.classList.add('lottoball-blue');
-        }
-        if (Number(number) >= 21 && Number(number) < 31) {
-          NUMBER.classList.add('lottoball-red');
-        }
-        if (Number(number) >= 31 && Number(number) < 41) {
-          NUMBER.classList.add('lottoball-gray');
-        }
-        if (Number(number) >= 41 && Number(number) <= 45) {
-          NUMBER.classList.add('lottoball-green');
-        }
+        NUMBER.innerText = num;
+        NUMBER.classList.add(colors[Math.floor(num / 10)]);
+
+        NUMBER_LIST.appendChild(NUMBER);
+
         if (idx === 6) {
           const BONUS_NUMBER_INTERVAL = document.createElement('span');
           BONUS_NUMBER_INTERVAL.innerText = '+';
@@ -211,6 +200,25 @@ class Controller {
       LOTTO_ROUND.appendChild(NUMBER_LIST);
 
       LOTTO_ROUND_CONTAINER.appendChild(LOTTO_ROUND);
+    }
+  }
+
+  createLottoNumberField() {
+    const LOTTO_NUMBER_CONTAINER = document.getElementById('lotto-number-wrapper');
+    const LOTTO_NUMBER_MAX_LENGTH = 45;
+
+    for (let number = 1; number <= LOTTO_NUMBER_MAX_LENGTH; number++) {
+      const LOTTO_NUMBER = document.createElement('div');
+
+      LOTTO_NUMBER.id = `lotto-number-${number}`;
+      LOTTO_NUMBER.classList.add('lotto-number');
+      LOTTO_NUMBER.innerText = number;
+
+      LOTTO_NUMBER.addEventListener('click', event => {
+        this.model.selectLottoNumber(Number(event.target.innerText));
+      });
+
+      LOTTO_NUMBER_CONTAINER.appendChild(LOTTO_NUMBER);
     }
   }
 }
