@@ -1,4 +1,3 @@
-// import { flow, map } from 'lodash/fp';
 import { colors } from '../../constant';
 
 class View {

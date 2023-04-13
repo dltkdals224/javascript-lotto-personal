@@ -1,6 +1,6 @@
 import Model from './components/model/index.js';
 import View from './components/view/index.js';
-import Controller from './components/controller/index.js';
+import Controller from './components/Controller/index.js';
 
 export class Program {
   constructor() {
