@@ -68,17 +68,17 @@
 인 패턴 중 하나. <br/> 모델(Model), 뷰(View), 그리고 컨트롤러(Controller)로 구성되어, 분리되어 동작
 함으로써 코드의 재사용성과 유지보수성을 높일 수 있다.
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/index.js#L1-L4
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/index.js#L1-L4
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/fe/js/app.js#L1-L15
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/fe/js/app.js#L1-L15
 
 <br/>
 
 - Model
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/fe/js/components/Model/index.js#L2-L10
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/fe/js/components/Model/index.js#L2-L10
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/fe/js/components/Model/index.js#L12-L83
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/fe/js/components/Model/index.js#L12-L83
 
 데이터와 데이터의 값이 바뀌는 이벤트에 대해 CustomEvent를 통한 발행을 처리.
 
@@ -89,9 +89,9 @@ https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/fe/js/com
 
 - View
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/fe/js/components/View/index.js#L177-L337
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/fe/js/components/View/index.js#L177-L337
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/fe/js/components/View/index.js#L10-L174
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/fe/js/components/View/index.js#L10-L174
 
 최초의 InitView HTML과 UI 관련 업데이트 함수를 작성. <br/>
 DOM 조작과 관련한 모든 처리를 View 클래스에서 담당하게 하므로써, 코드를 구성 요소로 분리하여 추상화 수준을 유지할 수 있도록 함.
@@ -101,9 +101,9 @@ DOM 조작과 관련한 모든 처리를 View 클래스에서 담당하게 하�
 
 - Controller
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/fe/js/components/Controller/index.js#L12-L53
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/fe/js/components/Controller/index.js#L12-L53
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/fe/js/components/Controller/index.js#L56-L223
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/fe/js/components/Controller/index.js#L56-L223
  
 Controller의 생성자에서 이벤트 리스너를 등록하고 각 이벤트에 대해 콜백 함수를 정의. <br/> 
 코드가 모듈화되어 의존성을 낮추고, 이벤트 처리 로직이 분리되어 가독성이 향상된다. <br/>
@@ -113,7 +113,7 @@ Controller의 생성자에서 이벤트 리스너를 등록하고 각 이벤트�
 
 ### express내 scrapping
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/be/controllers/lottoNumberScrap.Controller.js#L1-L44
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/be/controllers/lottoNumberScrap.Controller.js#L1-L44
 
 node.js 필드에서 axios와 cheerio를 통해 scrapping을 구현. <br/>
 특정 회차들의 로또 당첨 번호를 html tag를 통해 가져올 수 있도록 함.
@@ -169,7 +169,7 @@ const DATA_ARRAY = HTML_DATA_ARRAY.map((htmlData, idx) => {
 
 - **util func**
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/src/be/util/calculate.util.js#L1-L28
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/be/util/calculate.util.js#L1-L28
 
 Date 객체를 사용해 현재 날짜를 scrap하기 위한 최신 회차로 변환하는 util 함수.
 
