@@ -64,9 +64,8 @@
 
 ### MVC 디자인 패턴
 
-소프트웨어 개발에서 사용자 인터페이스, 데이터 및 논리 제어를 구현하는데 널리 사용되는 아키텍처 디자
-인 패턴 중 하나. <br/> 모델(Model), 뷰(View), 그리고 컨트롤러(Controller)로 구성되어, 분리되어 동작
-함으로써 코드의 재사용성과 유지보수성을 높일 수 있다.
+소프트웨어 개발에서 사용자 인터페이스, 데이터 및 논리 제어를 구현하는데 널리 사용되는 아키텍처 디자인 패턴 중 하나. <br/> 
+모델(Model), 뷰(View), 그리고 컨트롤러(Controller)로 구성되어, 분리되어 동작함으로써 코드의 재사용성과 유지보수성을 높일 수 있다.
 
 https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/src/index.js#L1-L4
 
@@ -177,17 +176,11 @@ Date 객체를 사용해 현재 날짜를 scrap하기 위한 최신 회차로 �
 
 ## 🛠 사용 기술
 
-<img alt="HTML5" src ="https://img.shields.io/badge/HTML5-E34F26?&style=flat&logo=HTML5&logoColor=white"/>
-<img alt="CSS3" src ="https://img.shields.io/badge/CSS3-1572B6?&style=flat&logo=CSS3&logoColor=white"/>
-<img alt="JavaScript" src ="https://img.shields.io/badge/JavaScript-F7DF1E?&style=flat&logo=JavaScript&logoColor=white"/>
-<img alt="nodedotjs" src ="https://img.shields.io/badge/Node.JS-339933?&style=flat&logo=nodedotjs&logoColor=white"/>
-<img alt="Express" src ="https://img.shields.io/badge/Express-000000?&style=flat&logo=Express&logoColor=white"/>
+<img alt="HTML5" src ="https://img.shields.io/badge/HTML5-E34F26?&style=flat&logo=HTML5&logoColor=white"/> <img alt="CSS3" src ="https://img.shields.io/badge/CSS3-1572B6?&style=flat&logo=CSS3&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScript-F7DF1E?&style=flat&logo=JavaScript&logoColor=white"/> <img alt="nodedotjs" src ="https://img.shields.io/badge/Node.JS-339933?&style=flat&logo=nodedotjs&logoColor=white"/> <img alt="Express" src ="https://img.shields.io/badge/Express-000000?&style=flat&logo=Express&logoColor=white"/>
 
 <br/>
 
-<img alt="axios" src ="https://img.shields.io/badge/axios-5A29E4?&style=flat&logo=axios&logoColor=white"/>
-<img alt="NodeMon" src ="https://img.shields.io/badge/NodeMon-76D04B?&style=flat&logo=NodeMon&logoColor=white"/>
-<img alt="Lodash" src ="https://img.shields.io/badge/Lodash-3492FF?&style=flat&logo=Lodash&logoColor=white"/>
+<img alt="axios" src ="https://img.shields.io/badge/axios-5A29E4?&style=flat&logo=axios&logoColor=white"/> <img alt="NodeMon" src ="https://img.shields.io/badge/NodeMon-76D04B?&style=flat&logo=NodeMon&logoColor=white"/> <img alt="Lodash" src ="https://img.shields.io/badge/Lodash-3492FF?&style=flat&logo=Lodash&logoColor=white"/>
 
 <br/>
 <br/>
@@ -232,9 +225,9 @@ Date 객체를 사용해 현재 날짜를 scrap하기 위한 최신 회차로 �
 
 ### lodash
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/webpack.config.js#L1-L46
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/webpack.config.js#L1-L46
 
-https://github.com/dltkdals224/javascript-lotto-personal/blob/main/babel.config.js#L1-L14
+https://github.com/dltkdals224/javascript-lotto-personal/blob/ef28caf4e50b31494486e4b06c7418c387cae7b7/babel.config.js#L1-L14
 
 lodash를 babel을 이용해 번들링하여 모듈 번들러의 크기를 줄임. <br/>
 babel-loader 가 lodash 모듈에서 사용하지 않는 함수들을 제거 및 번들링할 때 필요한 기능들만을 포함.
